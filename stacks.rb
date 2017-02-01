@@ -27,6 +27,7 @@ class LinkedList
      end
   end
 
+#####
   def get_position(pos_num)
     current = @head
     i = 1
@@ -50,12 +51,33 @@ class LinkedList
     end
     elements << current
   end
+#######
+
+  def insert_first(new_element)
+    new_element.next = @head
+    @head = new_element
+  end
+
+end
+
+class Stack
+  def initialize(top)
+    @ll = LinkedList.new
+    @ll.append(top)
+  end
+
+  def push(new_element)
+    ll_length = @ll.return_list.length
+    end_elm = @ll.get_position(ll_length)
+    end_elm.next = new_element
+  end
 
 end
 
 elm1 = Element.new(3)
 elm2 = Element.new(9)
 elm3 = Element.new(5)
+elm4 = Element.new(6)
 
 mylist = LinkedList.new
 binding.pry
