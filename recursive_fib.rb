@@ -1,12 +1,7 @@
 
 def get_fib(position)
-  if position == 1
-    return 1
-  elsif position <= 0
-    return 0
-  else
-    get_fib(position-1) + get_fib(position-2)
-  end
+  return position if (position == 1 || position == 0)
+  get_fib(position-1) + get_fib(position-2)
 end
 
 puts(get_fib(9)) #=> 34
