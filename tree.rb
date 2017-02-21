@@ -22,7 +22,6 @@ class BinaryTree
 
   def initialize(root=nil)
     @root = Node.new(root) # makes a new node with value of root and nil L/R
-    @result_array = []
   end
 
   def search_tree(search_val)
@@ -30,6 +29,7 @@ class BinaryTree
   end
 
   def print_tree() # print out all nodes as they are visited in pre-order order
+    @result_array = []
     preorder_print(self.root)
     @result_array.join('-')
   end
