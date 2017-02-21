@@ -9,19 +9,11 @@ class Node
     @right = right
   end
 
-  def has_children?
-    true unless (self.left.nil?) && (self.right.nil?)
-  end
-
   def search_node(node, search_value) # search the tree for a certain value
     return false if (node.value != search_value) && node.left.nil? && node.right.nil?
     return true if (node.value == search_value)
-    search_node(node.left, search_value) || search_node(node.right, search_value) if node.has_children?
+    search_node(node.left, search_value) || search_node(node.right, search_value)
   end
-
-  def preorder_search(start)
-  end
-
 
 end
 
@@ -48,12 +40,6 @@ class BinaryTree
     preorder_print(node.left) || preorder_print(node.right)
   end
 
-  # def preorder_print(start, traversal)
-  #   # """Helper method - use this to create a
-  #   # recursive print solution."""
-  #   return traversal
-  # end
-
 end
 
 
@@ -65,9 +51,9 @@ tree.root.left.right = Node.new(5)
 
 # Test search
 # Should be True
-# p tree.search_tree(4)
+p tree.search_tree(4)
 # Should be False
-# p tree.search_tree(6)
+p tree.search_tree(6)
 
 # Test print_tree
 # Should be 1-2-4-5-3
