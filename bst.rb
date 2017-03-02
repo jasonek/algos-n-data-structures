@@ -26,9 +26,9 @@ class BST
   end
 
   def insert_left(first_node, second_node, new_val) # actually inserts the value into BST
-    # new_node = Node.new(new_val)
-    # first_node.left = new_node
-    # new_node.(L OR R) = second_node
+    new_node = Node.new(new_val)
+    first_node.left = new_node
+    new_node.(L OR R) = second_node
   end
 
   def search(search_val)
