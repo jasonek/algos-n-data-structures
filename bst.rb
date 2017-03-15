@@ -18,24 +18,65 @@ class BST
     @root = Node.new(root) # makes a new node with value of root and nil L/R
   end
 
-  def insert(node,new_val)
-    # start on root always
-    # if new_val < node.value
-      insert(node.left, new_val) if new_val < node.left.value # recursive call
-      actually_insert(node, node.right) if new_val > node.left.value# insert new_val between current node and next node
-  end
-
-  def insert_left(first_node, second_node, new_val) # actually inserts the value into BST
-    # new_node = Node.new(new_val)
-    # first_node.left = new_node
-    # new_node.(L OR R) = second_node
+  def insert(new_val)
+    if find_closest_node(new_val) == false
+      p "Node with value #{new_val} already exists"
+      return
+    end
+    linking_node = find_closest_node(new_val)
+    if linking_node.is_a? Array
+      if new_val > linking_node[0].value
+        linking_node[0].right = Node.new(new_val)
+        linking_node[0].right.right = linking_node[1]
+      elsif new_val < linking_node[0].value
+        linking_node[0].left = Node.new(new_val)
+        linking_node[0].left.left = linking_node[1]
+      end
+    elsif new_val > linking_node.value
+      linking_node.right = Node.new(new_val)
+    elsif new_val < linking_node.value
+      linking_node.left = Node.new(new_val)
+    end
   end
 
   def search(search_val)
+    last_node = find_closest_node(search_val)
+    last_node.value == search_val ? true : false
+  end
+
+  def find_closest_node(search_val, node = self.root)
+    if search_val == node.value
+      return node
+
+    elsif search_val > node.value
+
+      if node.right.nil?
+        return node
+      elsif search_val > node.right.value
+        find_closest_node(search_val, node.right)
+      elsif search_val < node.right.value
+        return [node, node.right]
+      elsif search_val == node.right.value
+        return node
+      end
+
+    elsif search_val < node.value
+
+      if node.left.nil?
+        return node
+      elsif search_val < node.left.value
+        find_closest_node(search_val, node.left)
+      elsif search_val > node.left.value
+        return [node, node.left]
+      elsif search_val == node.left.value
+        return node
+      end
+
+    end
+
   end
 
 end
-
 
 
 # Set up tree
@@ -49,6 +90,6 @@ tree.insert(5)
 
 # Check search
 # Should be True
-print tree.search(4)
+p tree.search(4)
 # Should be False
-print tree.search(6)
+p tree.search(6)
